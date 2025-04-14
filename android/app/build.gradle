@@ -130,6 +130,12 @@ android {
     pip {
             install "torch==1.12.0"
             install "numpy==1.23.5"
+            install "torch==1.12.0"  // Must match your .ptl model version
+            install "onnxruntime"
+            install "pillow"
+            install "numpy"
+            install "efficientnet-pytorch"
+            install "torchvision"
         // Add other ML dependencies here
     }
 }

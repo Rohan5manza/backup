@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, ActivityIndicator, Image } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import * as ImagePicker from 'expo-image-picker';
@@ -74,13 +74,13 @@ export default function FoodScannerScreen({ navigation }: { navigation: any }) {
             <View style={styles.buttonGroup}>
                 <Button
                     icon={<Icon name="camera" type="font-awesome" color="white" />}
-                    title="Take Photo"
+                    title=" Take Photo"
                     buttonStyle={styles.button}
                     onPress={pickImageFromCamera}
                 />
                 <Button
                     icon={<Icon name="photo" type="material" color="white" />}
-                    title="From Gallery"
+                    title=" From Gallery"
                     buttonStyle={styles.button}
                     onPress={pickImageFromGallery}
                 />

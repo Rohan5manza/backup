@@ -1,7 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
-
+apply plugin: "com.chaquo.python"   // Add Chaquopy here
 def projectRoot = rootDir.getAbsoluteFile().getParentFile().getAbsolutePath()
 
 /**
@@ -124,6 +124,24 @@ android {
     androidResources {
         ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~'
     }
+
+    python {
+    version "3.11"  // Use Python version compatible with your models
+    pip {
+            install "torch==1.12.0"
+            install "numpy==1.23.5"
+        // Add other ML dependencies here
+    }
+}
+
+    flavorDimensions "default"
+    productFlavors {
+        // Required by Chaquopy
+        "python" {
+            dimension "default"
+            ndk { abiFilters "armeabi-v7a", "arm64-v8a" }
+        }
+    }
 }
 
 // Apply static values from `gradle.properties` to the `android.packagingOptions`
@@ -174,3 +192,6 @@ dependencies {
         implementation jscFlavor
     }
 }
+
+
+

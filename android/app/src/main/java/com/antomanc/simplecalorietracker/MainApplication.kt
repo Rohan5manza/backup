@@ -55,3 +55,18 @@ class MainApplication : Application(), ReactApplication {
     ApplicationLifecycleDispatcher.onConfigurationChanged(this, newConfig)
   }
 }
+
+import com.yourproject.PythonModule; // Add this import
+
+@Override
+protected List<ReactPackage> getPackages() {
+    return Arrays.asList(
+        new MainReactPackage(),
+        new ReactPackage() {
+            @Override
+            public List<NativeModule> createNativeModules(ReactApplicationContext context) {
+                return Arrays.asList(new PythonModule(context));
+            }
+        }
+    );
+}

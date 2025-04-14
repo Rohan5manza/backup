@@ -1,5 +1,4 @@
-package com.antomanc.simplecalorietracker
-
+import com.antomanc.simplecalorietracker.PythonModule
 import android.app.Application
 import android.content.res.Configuration
 import com.facebook.react.*
@@ -13,19 +12,17 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.ViewManager
 
 class MainApplication : Application(), ReactApplication {
-    override val reactNativeHost: ReactNativeHost = ReactNativeHostWrapper(
-        this,
-        object : DefaultReactNativeHost(this) {
-            override fun getPackages(): List<ReactPackage> {
-                val packages = PackageList(this).packages.toMutableList()
-                packages.add(object : ReactPackage {
-                    override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> =
-                        listOf(PythonModule(reactContext))
-                         
-                    override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> =
-                        emptyList()
-                })
-                return packages
+   override fun getPackages(): List<ReactPackage> {
+    val packages = PackageList(this).packages.toMutableList()
+    packages.add(object : ReactPackage {
+        override fun createNativeModules(reactContext: ReactApplicationContext) =
+            listOf(PythonModule(reactContext))  // Direct instantiation
+        
+        override fun createViewManagers(reactContext: ReactApplicationContext) = 
+            emptyList<ViewManager<*, *>>()
+    })
+    return packages
+}
             }
              
             override fun getJSMainModuleName(): String = ".expo/.virtual-metro-entry"

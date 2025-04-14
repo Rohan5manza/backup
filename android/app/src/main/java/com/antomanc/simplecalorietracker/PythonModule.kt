@@ -20,14 +20,15 @@ public class PythonModule extends ReactContextBaseJavaModule {
         }
     }
 
-    @Override
-    public String getName() {
-        return "PythonModule";
+    override fun getName(): String {
+        Log.d("PythonModule", "Module registered as: PythonModule")
+        return "PythonModule"
     }
 
     @ReactMethod
     public void detectFood(String base64Image, Promise promise) {
         try {
+            Log.d("PythonModule", "Python started: " + Python.isStarted());
             Python py = Python.getInstance();
             PyObject detector = py.getModule("detector");
             PyObject result = detector.callAttr("detect_food", base64Image);
@@ -55,6 +56,7 @@ public class PythonModule extends ReactContextBaseJavaModule {
         } catch (PyException e) {
             promise.reject("PYTHON_ERROR", e.getMessage(), e);
         } catch (Exception e) {
+            Log.e("PythonModule", "Error:", e);
             promise.reject("UNEXPECTED_ERROR", e.getMessage(), e);
         }
     }
